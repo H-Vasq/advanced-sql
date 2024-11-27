@@ -1,8 +1,10 @@
 SELECT emp.firstName,
   emp.lastName,
   emp.title,
-  emp.firstName AS ManagerFirstName,
-  emp.lastName AS ManagerLastName
+  emp.startDate,
+  sls.salesId
 FROM employee emp
-INNER JOIN employee mng
-  ON emp.managerId = mng.employeeId
+LEFT JOIN sales sls
+  ON emp.employeeId = sls.employeeId
+WHERE emp.title = 'Sales Person'
+AND sls.salesId IS NULL;
